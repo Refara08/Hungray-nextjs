@@ -5,7 +5,7 @@ const CartMobileBtn = () => {
   return (
     <CartMobileModal>
       <div className="block lg:hidden bg-yellow p-2 rounded-lg">
-        <BagIcon size="3vh" />
+        <BagIcon size="4vh" />
       </div>
     </CartMobileModal>
   );
