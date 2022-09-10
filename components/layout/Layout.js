@@ -5,7 +5,7 @@ const Layout = (props) => {
     <div className="text-black">
       <Navigation />
       <main>{props.children}</main>
-      {/* <p>footer</p> */}
+      <p className="h-[2000px] w-full grid place-items-end">footer</p>
     </div>
   );
 };

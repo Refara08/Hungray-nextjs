@@ -1,4 +1,5 @@
 import Head from "next/head";
+import BestSellingItems from "../components/best-selling-section/BestSellingItems";
 import Home from "../components/home/Home";
 
 export default function HomePage() {
@@ -18,6 +19,7 @@ export default function HomePage() {
       </Head>
 
       <Home />
+      <BestSellingItems />
     </div>
   );
 }
