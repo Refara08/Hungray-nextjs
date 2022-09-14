@@ -1,9 +1,8 @@
 import Head from "next/head";
 import About from "../components/about/About";
-import BestSellingItems from "../components/best-selling-section/BestSellingItems";
+import BestSellingItems from "../components/menu/best-selling-section/BestSellingItems";
 import Home from "../components/home/Home";
-
-import WavesDown from "../components/home/waves-down";
+import SignatureMenu from "../components/menu/signature-menu/SignatureMenu";
 
 export default function HomePage() {
   return (
@@ -24,9 +23,7 @@ export default function HomePage() {
       <Home />
       <About />
       <BestSellingItems />
-      <div className="rotate-180">
-        <WavesDown />
-      </div>
+      <SignatureMenu />
     </div>
   );
 }

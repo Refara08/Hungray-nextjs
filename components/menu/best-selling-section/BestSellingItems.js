@@ -1,64 +1,15 @@
+import { useState } from "react";
+
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 import BestSellingItemCard from "./BestSellingItemCard";
+import LIST_MENU from "../../../store/menu";
 
-const bestMeals = [
-  {
-    url: "/images/menu/drinks/blue-ocean.jpg",
-    title: "Blue Ocean",
-    desc: "The description Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, doloremque.",
-  },
-  {
-    url: "/images/menu/drinks/chocolate-milkshake.jpg",
-    title: "Chocolate Milkshake",
-    desc: "The description Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, doloremque.",
-  },
-  {
-    url: "/images/menu/drinks/cucumber-squash.jpg",
-    title: "Cucumber Squash",
-    desc: "The description Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, doloremque.",
-  },
-  {
-    url: "/images/menu/drinks/ice-choco.jpg",
-    title: "Ice Choco",
-    desc: "The description Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, doloremque.",
-  },
-  {
-    url: "/images/menu/drinks/ice-lemon-tea.jpg",
-    title: "Ice Lemon Tea",
-    desc: "The description Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, doloremque.",
-  },
-  {
-    url: "/images/menu/drinks/blue-ocean.jpg",
-    title: "Blue Ocean",
-    desc: "The description Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, doloremque.",
-  },
-  {
-    url: "/images/menu/drinks/chocolate-milkshake.jpg",
-    title: "Chocolate Milkshake",
-    desc: "The description Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, doloremque.",
-  },
-  {
-    url: "/images/menu/drinks/cucumber-squash.jpg",
-    title: "Cucumber Squash",
-    desc: "The description Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, doloremque.",
-  },
-  {
-    url: "/images/menu/drinks/ice-choco.jpg",
-    title: "Ice Choco",
-    desc: "The description Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, doloremque.",
-  },
-  {
-    url: "/images/menu/drinks/ice-lemon-tea.jpg",
-    title: "Ice Lemon Tea",
-    desc: "The description Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, doloremque.",
-  },
-];
+const bestMeals = LIST_MENU.filter((item) => item.bestSeller === true);
 
 const responsive = {
   superLargeDesktop: {
-    // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 1536 },
     partialVisibilityGutter: 60,
     items: 3,
@@ -101,8 +52,10 @@ const responsive = {
 };
 
 const BestSellingItems = () => {
+  const [isGrabbing, setIsGrabbing] = useState(false);
+
   return (
-    <section id="menu" className="bg-white py-40">
+    <section id="menu" className="bg-white py-12 lg:py-40">
       <div className="custom-container flex flex-col lg:grid lg:grid-cols-6 gap-6 items-center">
         <div className="lg:col-span-2 flex flex-col gap-4 items-start">
           <h2 className="font-bold text-4xl">Our Best Selling Meals</h2>
@@ -115,14 +68,20 @@ const BestSellingItems = () => {
             See all available meals
           </button>
         </div>
-        <div className="lg:col-span-4 w-full">
+        <div
+          onMouseDown={() => setIsGrabbing(true)}
+          onMouseUp={() => setIsGrabbing(false)}
+          className={`lg:col-span-4 w-full ${
+            isGrabbing ? "cursor-grabbing" : "cursor-grab"
+          }`}
+        >
           <Carousel
             partialVisible={true}
             swipeable={true}
             draggable={true}
             showDots={false}
             responsive={responsive}
-            ssr={true} // means to render carousel on server-side.
+            ssr={true}
             infinite={true}
             autoPlay={true}
             autoPlaySpeed={3000}
@@ -130,6 +89,7 @@ const BestSellingItems = () => {
             customTransition="all 0.3s"
             transitionDuration={500}
             containerClass="pb-12"
+            arrows={false}
             // removeArrowOnDeviceType={["tablet", "mobile"]}
             // deviceType={this.props.deviceType}
             // dotListClass="custom-dot-list-style"

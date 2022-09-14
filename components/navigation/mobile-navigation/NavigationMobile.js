@@ -14,7 +14,7 @@ const NavigationMobile = (props) => {
   return (
     <NavMobileModal>
       <ul className="flex flex-col items-end px-4 py-6 gap-8 bg-light-yellow h-screen w-screen">
-        <div onClick={onClose}>
+        <div onClick={onClose} className="cursor-pointer">
           <CloseIcon size="3vh" />
         </div>
         {items.map((item, index) => (
