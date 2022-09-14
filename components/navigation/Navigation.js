@@ -29,7 +29,10 @@ const Navigation = () => {
     <nav className=" bg-light-yellow text-black sticky top-0 z-30">
       <div className="container mx-auto flex justify-between items-center py-4 px-4 pb-2">
         <Link href={"/"}>
-          <a className="flex items-center gap-1 pb-2 text-3xl">
+          <a
+            onClick={() => setCurrNav("Home")}
+            className="flex items-center gap-1 pb-2 text-3xl"
+          >
             <UtensilsIcon color="#FFBB44" size={"3vh"} />
             <span className="font-bold">Hungray</span>
           </a>

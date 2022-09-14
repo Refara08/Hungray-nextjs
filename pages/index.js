@@ -1,6 +1,9 @@
 import Head from "next/head";
+import About from "../components/about/About";
 import BestSellingItems from "../components/best-selling-section/BestSellingItems";
 import Home from "../components/home/Home";
+
+import WavesDown from "../components/home/waves-down";
 
 export default function HomePage() {
   return (
@@ -19,7 +22,11 @@ export default function HomePage() {
       </Head>
 
       <Home />
+      <About />
       <BestSellingItems />
+      <div className="rotate-180">
+        <WavesDown />
+      </div>
     </div>
   );
 }

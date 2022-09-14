@@ -1,8 +1,7 @@
-// import { useState, useRef } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-import Image from "next/image";
+import BestSellingItemCard from "./BestSellingItemCard";
 
 const bestMeals = [
   {
@@ -61,49 +60,49 @@ const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 1536 },
-    paritialVisibilityGutter: 60,
+    partialVisibilityGutter: 60,
     items: 3,
   },
   desktopLg: {
     breakpoint: { max: 1536, min: 1280 },
-    paritialVisibilityGutter: 0,
+    partialVisibilityGutter: 0,
     items: 3,
   },
   desktop: {
     breakpoint: { max: 1280, min: 1024 },
-    paritialVisibilityGutter: 40,
+    partialVisibilityGutter: 40,
     items: 2,
   },
   tabletLg: {
     breakpoint: { max: 1024, min: 780 },
-    paritialVisibilityGutter: 80,
+    partialVisibilityGutter: 80,
     items: 2,
   },
   tablet: {
     breakpoint: { max: 780, min: 640 },
-    paritialVisibilityGutter: 20,
+    partialVisibilityGutter: 20,
     items: 2,
   },
   mobileXl: {
     breakpoint: { max: 640, min: 570 },
-    paritialVisibilityGutter: 200,
+    partialVisibilityGutter: 200,
     items: 1,
   },
   mobileLg: {
     breakpoint: { max: 570, min: 470 },
-    paritialVisibilityGutter: 140,
+    partialVisibilityGutter: 140,
     items: 1,
   },
   mobile: {
     breakpoint: { max: 470, min: 0 },
-    paritialVisibilityGutter: 70,
+    partialVisibilityGutter: 70,
     items: 1,
   },
 };
 
 const BestSellingItems = () => {
   return (
-    <section className="bg-white">
+    <section id="menu" className="bg-white py-40">
       <div className="custom-container flex flex-col lg:grid lg:grid-cols-6 gap-6 items-center">
         <div className="lg:col-span-2 flex flex-col gap-4 items-start">
           <h2 className="font-bold text-4xl">Our Best Selling Meals</h2>
@@ -118,7 +117,7 @@ const BestSellingItems = () => {
         </div>
         <div className="lg:col-span-4 w-full">
           <Carousel
-            partialVisbile
+            partialVisible={true}
             swipeable={true}
             draggable={true}
             showDots={false}
@@ -137,22 +136,7 @@ const BestSellingItems = () => {
             itemClass="transition-all duration-300"
           >
             {bestMeals.map((item, index) => (
-              <div
-                key={index}
-                className="w-[250px] rounded-xl overflow-hidden border-2 border-stone-300 shadow-xl"
-              >
-                <Image
-                  draggable={false}
-                  src={item.url}
-                  alt={`image of ${item.title}`}
-                  width={"250px"}
-                  height={"250px"}
-                />
-                <div className="p-4">
-                  <h3 className="text-xl font-bold">{item.title}</h3>
-                  <p>{item.desc}</p>
-                </div>
-              </div>
+              <BestSellingItemCard key={index} item={item} />
             ))}
           </Carousel>
           <button className="lg:hidden block button bg-yellow">
