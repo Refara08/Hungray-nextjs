@@ -36,11 +36,6 @@ a {
 }
 
 /* reservation form */
-.reservation-form input,
-.reservation-form textarea {
-  @apply border-2 border-stone-200 rounded-lg py-1 px-3;
-}
-
 .input-group {
   @apply grid grid-cols-2 gap-4;
 }
@@ -51,4 +46,9 @@ a {
 
 .control-group label {
   @apply mb-2;
+}
+
+.control-group input,
+.control-group textarea {
+  @apply border-2 border-stone-200 rounded-lg py-1 px-3;
 }
