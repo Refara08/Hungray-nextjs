@@ -38,7 +38,13 @@ const ReservationForm = () => {
         </div>
         <div className="control-group">
           <label htmlFor="guess">Table For</label>
-          <input type="number" name="guess" id="guess" required />
+          <input
+            type="number"
+            name="guess"
+            id="guess"
+            required
+            placeholder="2 people"
+          />
         </div>
       </div>
       {/* ocassion */}

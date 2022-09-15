@@ -27,8 +27,8 @@ const SignatureMenu = () => {
     <section id="signature">
       <WaveWrap>
         <div className="bg-light-yellow">
-          <div className="custom-container sticky top-16 bg-light-yellow z-20 py-4">
-            <h2 className="font-bold text-4xl w-[80%]">Our signature Menu</h2>
+          <div className="custom-container sticky top-16 bg-light-yellow z-20 pb-1 sm:py-4">
+            <h2 className="font-bold text-4xl w-full">Our signature Menu</h2>
             <CategoryFilter onChangeCategory={changeCategoryHandler} />
           </div>
           <div className="custom-container">

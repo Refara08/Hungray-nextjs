@@ -18,7 +18,7 @@ const CategoryFilter = (props) => {
     "py-1 px-3 rounded-full hover:bg-yellow hover:shadow-lg transition duration-300";
 
   return (
-    <div className="flex items-center gap-4 my-4">
+    <div className="flex items-center gap-4 my-2 sm:my-4">
       <h3>Filter by category</h3>
 
       {/* //filter for mobile */}
