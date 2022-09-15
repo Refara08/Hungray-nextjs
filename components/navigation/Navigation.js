@@ -14,7 +14,7 @@ const NavItems = [
   { tag: "Menu", link: "/#menu" },
   { tag: "Testimonials", link: "/#testimonials" },
   { tag: "Reservation", link: "/#reservation" },
-  { tag: "Contact Us", link: "/#footer" },
+  { tag: "Contact Us", link: "/#contact" },
 ];
 
 const Navigation = () => {

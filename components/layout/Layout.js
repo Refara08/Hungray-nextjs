@@ -1,11 +1,12 @@
 import Navigation from "../navigation/Navigation";
+import Contact from "../contact/Contact";
 
 const Layout = (props) => {
   return (
     <div className="text-black">
       <Navigation />
       <main>{props.children}</main>
-      <p className="h-[2000px] w-full grid place-items-end">footer</p>
+      <Contact />
     </div>
   );
 };

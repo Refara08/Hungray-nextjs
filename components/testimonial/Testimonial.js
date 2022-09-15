@@ -56,7 +56,7 @@ const Testimonial = () => {
     <section id="testimonials" className="bg-white py-12 lg:py-24">
       <div className="custom-container flex flex-col lg:grid lg:grid-cols-6 gap-6 items-center">
         <div className="lg:col-span-2 flex flex-col gap-4 items-start">
-          <h2 className="font-bold text-4xl w-[80%] lg:w-full">
+          <h2 className="font-bold text-4xl w-[80%] ">
             What they said about us
           </h2>
           <p>

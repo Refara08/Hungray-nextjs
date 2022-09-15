@@ -36,7 +36,8 @@ a {
 }
 
 /* reservation form */
-.reservation-form input {
+.reservation-form input,
+.reservation-form textarea {
   @apply border-2 border-stone-200 rounded-lg py-1 px-3;
 }
 

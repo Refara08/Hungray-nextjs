@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const About = () => {
   return (
-    <section id="about-us" className="bg-white mb-12">
+    <section id="about-us" className="bg-white mb-12 pt-24">
       <div className="custom-container block lg:grid grid-cols-2 items-center justify-center gap-6">
         <div className="grid place-items-center mb-12 lg:mb-0">
           <Image

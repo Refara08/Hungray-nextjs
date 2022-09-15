@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from "next/link";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -64,9 +65,11 @@ const BestSellingItems = () => {
             Consectetur quod fugit debitis reprehenderit culpa alias in
             voluptate voluptatem labore ab!
           </p>
-          <button className="hidden lg:block button bg-yellow">
-            See all available meals
-          </button>
+          <Link href={"/#signature"}>
+            <button className="hidden lg:block button bg-yellow">
+              See all available meals
+            </button>
+          </Link>
         </div>
         <div
           onMouseDown={() => setIsGrabbing(true)}
@@ -99,9 +102,11 @@ const BestSellingItems = () => {
               <BestSellingItemCard key={index} item={item} />
             ))}
           </Carousel>
-          <button className="lg:hidden block button bg-yellow">
-            See all available meals
-          </button>
+          <Link href={"/#signature"}>
+            <button className="lg:hidden block button bg-yellow">
+              See all available meals
+            </button>
+          </Link>
         </div>
       </div>
     </section>
