@@ -3,6 +3,7 @@ import About from "../components/about/About";
 import BestSellingItems from "../components/menu/best-selling-section/BestSellingItems";
 import Home from "../components/home/Home";
 import SignatureMenu from "../components/menu/signature-menu/SignatureMenu";
+import Testimonial from "../components/testimonial/Testimonial";
 
 export default function HomePage() {
   return (
@@ -24,6 +25,7 @@ export default function HomePage() {
       <About />
       <BestSellingItems />
       <SignatureMenu />
+      <Testimonial />
     </div>
   );
 }

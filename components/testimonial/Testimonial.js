@@ -3,10 +3,8 @@ import { useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-import BestSellingItemCard from "./BestSellingItemCard";
-import LIST_MENU from "../../../store/menu";
-
-const bestMeals = LIST_MENU.filter((item) => item.bestSeller === true);
+import TestimonialCard from "./TestimonialCard";
+import testimonial_data from "../../store/testimonial-data";
 
 const responsive = {
   superLargeDesktop: {
@@ -21,52 +19,51 @@ const responsive = {
   },
   desktop: {
     breakpoint: { max: 1280, min: 1024 },
-    partialVisibilityGutter: 40,
-    items: 2,
+    partialVisibilityGutter: 260,
+    items: 1,
   },
   tabletLg: {
     breakpoint: { max: 1024, min: 780 },
-    partialVisibilityGutter: 80,
-    items: 2,
+    partialVisibilityGutter: 350,
+    items: 1,
   },
   tablet: {
     breakpoint: { max: 780, min: 640 },
-    partialVisibilityGutter: 20,
-    items: 2,
+    partialVisibilityGutter: 190,
+    items: 1,
   },
   mobileXl: {
     breakpoint: { max: 640, min: 570 },
-    partialVisibilityGutter: 200,
+    partialVisibilityGutter: 150,
     items: 1,
   },
   mobileLg: {
     breakpoint: { max: 570, min: 470 },
-    partialVisibilityGutter: 140,
+    partialVisibilityGutter: 90,
     items: 1,
   },
   mobile: {
     breakpoint: { max: 470, min: 0 },
-    partialVisibilityGutter: 70,
+    partialVisibilityGutter: 0,
     items: 1,
   },
 };
 
-const BestSellingItems = () => {
+const Testimonial = () => {
   const [isGrabbing, setIsGrabbing] = useState(false);
 
   return (
-    <section id="menu" className="bg-white py-12 lg:py-40">
+    <section id="testimonials" className="bg-white py-12 lg:py-24">
       <div className="custom-container flex flex-col lg:grid lg:grid-cols-6 gap-6 items-center">
         <div className="lg:col-span-2 flex flex-col gap-4 items-start">
-          <h2 className="font-bold text-4xl w-[80%]">Our Best Selling Meals</h2>
+          <h2 className="font-bold text-4xl w-[80%]">
+            What they said about us
+          </h2>
           <p>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit.
             Consectetur quod fugit debitis reprehenderit culpa alias in
             voluptate voluptatem labore ab!
           </p>
-          <button className="hidden lg:block button bg-yellow">
-            See all available meals
-          </button>
         </div>
         <div
           onMouseDown={() => setIsGrabbing(true)}
@@ -95,17 +92,14 @@ const BestSellingItems = () => {
             // dotListClass="custom-dot-list-style"
             itemClass="transition-all duration-300"
           >
-            {bestMeals.map((item, index) => (
-              <BestSellingItemCard key={index} item={item} />
+            {testimonial_data.map((item, index) => (
+              <TestimonialCard key={index} item={item} />
             ))}
           </Carousel>
-          <button className="lg:hidden block button bg-yellow">
-            See all available meals
-          </button>
         </div>
       </div>
     </section>
   );
 };
 
-export default BestSellingItems;
+export default Testimonial;
