@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 import CategoryFilter from "./CategoryFilter";
 import WaveWrap from "../../ui/WaveWrap";
@@ -9,6 +10,7 @@ import LIST_MENU from "../../../store/menu";
 const SignatureMenu = () => {
   const [category, setCategory] = useState("ALL");
   const [menuItems, setMenuItems] = useState([...LIST_MENU]);
+  const router = useRouter();
 
   useEffect(() => {
     if (category === "ALL") {
@@ -16,6 +18,8 @@ const SignatureMenu = () => {
     } else {
       setMenuItems(LIST_MENU.filter((item) => item.category === `${category}`));
       console.log(category);
+      console.log("FIRE");
+      router.replace("/#signature");
     }
   }, [category]);
 
