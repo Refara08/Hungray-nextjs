@@ -9,13 +9,13 @@ import testimonial_data from "../../store/testimonial-data";
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 1536 },
-    partialVisibilityGutter: 60,
-    items: 3,
+    partialVisibilityGutter: 100,
+    items: 2,
   },
   desktopLg: {
     breakpoint: { max: 1536, min: 1280 },
-    partialVisibilityGutter: 0,
-    items: 3,
+    partialVisibilityGutter: 20,
+    items: 2,
   },
   desktop: {
     breakpoint: { max: 1280, min: 1024 },
@@ -39,7 +39,7 @@ const responsive = {
   },
   mobileLg: {
     breakpoint: { max: 570, min: 470 },
-    partialVisibilityGutter: 90,
+    partialVisibilityGutter: 40,
     items: 1,
   },
   mobile: {
@@ -56,7 +56,7 @@ const Testimonial = () => {
     <section id="testimonials" className="bg-white py-12 lg:py-24">
       <div className="custom-container flex flex-col lg:grid lg:grid-cols-6 gap-6 items-center">
         <div className="lg:col-span-2 flex flex-col gap-4 items-start">
-          <h2 className="font-bold text-4xl w-[80%]">
+          <h2 className="font-bold text-4xl w-[80%] lg:w-full">
             What they said about us
           </h2>
           <p>

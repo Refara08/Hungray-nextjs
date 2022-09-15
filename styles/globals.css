@@ -34,3 +34,20 @@ a {
 .button-sm {
   @apply py-1 px-5 font-semibold rounded-xl transition duration-300 hover:bg-opacity-80 hover:shadow-lg;
 }
+
+/* reservation form */
+.reservation-form input {
+  @apply border-2 border-stone-200 rounded-lg py-1 px-3;
+}
+
+.input-group {
+  @apply grid grid-cols-2 gap-4;
+}
+
+.control-group {
+  @apply flex flex-col mb-4;
+}
+
+.control-group label {
+  @apply mb-2;
+}

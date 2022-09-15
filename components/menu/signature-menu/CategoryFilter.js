@@ -26,7 +26,7 @@ const CategoryFilter = (props) => {
         className="block sm:hidden bg-yellow py-1 px-3 rounded-full font-semibold text-center appearance-none"
         name="category"
         id="category"
-        defaultValue={"all"}
+        defaultValue={"ALL"}
         onChange={filterCategoryHandler}
       >
         <option value="ALL">All</option>
