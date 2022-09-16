@@ -3,7 +3,7 @@ import Link from "next/link";
 import CartMobileModal from "./CartModal";
 import BagIcon from "../../icons/BagIcon";
 
-const CartMobileBtn = () => {
+const CartMobileBtn = ({ bagNum }) => {
   return (
     <CartMobileModal>
       <Link href="/cart">
@@ -12,7 +12,7 @@ const CartMobileBtn = () => {
             <BagIcon size="4vh" />
           </div>
           <div className="block lg:hidden absolute -top-3 -right-3 bg-red-600 text-white px-2 rounded-full">
-            3
+            {bagNum}
           </div>
         </a>
       </Link>

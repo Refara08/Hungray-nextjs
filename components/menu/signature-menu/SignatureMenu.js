@@ -17,8 +17,6 @@ const SignatureMenu = () => {
       setMenuItems(LIST_MENU);
     } else {
       setMenuItems(LIST_MENU.filter((item) => item.category === `${category}`));
-      console.log(category);
-      console.log("FIRE");
       router.replace("/#signature");
     }
   }, [category]);

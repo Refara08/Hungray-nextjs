@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import MenuButton from "../MenuButton";
+
 const BestSellingItemCard = (props) => {
   const { item } = props;
   const formatedPrice = `Rp.${item.price.toLocaleString("id-ID")}`;
@@ -12,14 +14,12 @@ const BestSellingItemCard = (props) => {
         width={"250px"}
         height={"250px"}
       />
-      <div className="p-4">
+      <div className="p-4 h-[160px]">
         <h3 className="text-xl font-bold">{item.name}</h3>
         <p>{item.desc}</p>
-        <div className="mt-4 flex justify-between items-center">
+        <div className="mt-4 flex justify-between items-start">
           <p className="font-semibold">{formatedPrice}</p>
-          <button className="button-sm border-2 border-yellow hover:border-transparent hover:bg-yellow">
-            Add
-          </button>
+          <MenuButton mealName={item.name} price={item.price} id={item.id} />
         </div>
       </div>
     </div>

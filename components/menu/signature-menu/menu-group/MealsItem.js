@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import MenuButton from "../../MenuButton";
+
 import BestSeller from "./BestSeller";
 import Recommended from "./Recommended";
 
@@ -8,8 +10,8 @@ const MealsItem = ({ item }) => {
 
   return (
     <div className="rounded-xl bg-white shadow-lg p-4 mb-6 md:flex md:flex-col md:justify-between">
-      <div className="flex flex-row-reverse md:flex-col justify-between items-start gap-2">
-        <div className="w-[120px] md:w-full rounded-lg sm:overflow-hidden">
+      <div className="grid grid-cols-3 md:flex md:flex-col justify-between items-start gap-2">
+        <div className="order-2 md:order-none rounded-lg w-full sm:overflow-hidden">
           <Image
             src={item.url}
             alt={`Image of ${item.name}`}
@@ -17,13 +19,11 @@ const MealsItem = ({ item }) => {
             height="150px"
             layout="responsive"
           />
-          <div className="flex justify-end mt-1 sm:hidden w-full translate-y-[5px]">
-            <button className="button-sm border-2 border-yellow hover:border-transparent hover:bg-yellow">
-              add
-            </button>
+          <div className="flex justify-end mt-1 sm:hidden w-full translate-y-[5px] h-[36px]">
+            <MenuButton mealName={item.name} price={item.price} id={item.id} />
           </div>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 col-span-2 order-1 md:order-none">
           <h3 className="text-lg font-bold">{item.name}</h3>
           <div className="flex gap-2">
             {item.bestSeller && <BestSeller />}
@@ -34,9 +34,7 @@ const MealsItem = ({ item }) => {
         </div>
       </div>
       <div className="w-full hidden sm:flex justify-end pt-0 sm:pt-4">
-        <button className="button-sm border-2 border-yellow hover:border-transparent hover:bg-yellow">
-          add
-        </button>
+        <MenuButton mealName={item.name} price={item.price} id={item.id} />
       </div>
     </div>
   );

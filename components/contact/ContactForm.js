@@ -16,13 +16,12 @@ const ContactForm = () => {
           <input type="text" name="name" id="name" />
         </div>
         {/* Stars Input--------------------------------------------------------------- */}
-        <h3 className="mb-2">How would you rate the restaurant?</h3>
-        <div className="flex text-yellow mb-4">
-          <label
-            htmlFor="one"
-            onMouseEnter={() => setStarHover(1)}
-            onMouseLeave={() => setStarHover(0)}
-          >
+        <h3 className="mb-2">How would you rate Hungray?</h3>
+        <div
+          onMouseLeave={() => setStarHover(0)}
+          className="flex text-yellow mb-4 w-min"
+        >
+          <label htmlFor="one" onMouseEnter={() => setStarHover(1)}>
             {stars >= 1 || starHover >= 1 ? (
               <FillStar size="2rem" />
             ) : (
@@ -37,11 +36,7 @@ const ContactForm = () => {
             onChange={() => setStars(1)}
           />
           {/* two stars */}
-          <label
-            htmlFor="two"
-            onMouseEnter={() => setStarHover(2)}
-            onMouseLeave={() => setStarHover(0)}
-          >
+          <label htmlFor="two" onMouseEnter={() => setStarHover(2)}>
             {stars >= 2 || starHover >= 2 ? (
               <FillStar size="2rem" />
             ) : (
@@ -56,11 +51,7 @@ const ContactForm = () => {
             onChange={() => setStars(2)}
           />
           {/* three stars */}
-          <label
-            htmlFor="three"
-            onMouseEnter={() => setStarHover(3)}
-            onMouseLeave={() => setStarHover(0)}
-          >
+          <label htmlFor="three" onMouseEnter={() => setStarHover(3)}>
             {stars >= 3 || starHover >= 3 ? (
               <FillStar size="2rem" />
             ) : (
@@ -75,11 +66,7 @@ const ContactForm = () => {
             onChange={() => setStars(3)}
           />
           {/* Four stars */}
-          <label
-            htmlFor="four"
-            onMouseEnter={() => setStarHover(4)}
-            onMouseLeave={() => setStarHover(0)}
-          >
+          <label htmlFor="four" onMouseEnter={() => setStarHover(4)}>
             {stars >= 4 || starHover >= 4 ? (
               <FillStar size="2rem" />
             ) : (
@@ -94,11 +81,7 @@ const ContactForm = () => {
             onChange={() => setStars(4)}
           />
           {/* Five */}
-          <label
-            htmlFor="five"
-            onMouseEnter={() => setStarHover(5)}
-            onMouseLeave={() => setStarHover(0)}
-          >
+          <label htmlFor="five" onMouseEnter={() => setStarHover(5)}>
             {stars >= 5 || starHover >= 5 ? (
               <FillStar size="2rem" />
             ) : (

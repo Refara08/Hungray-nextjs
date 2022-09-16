@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Link from "next/link";
 
+import { useSelector } from "react-redux";
+
 import { Squash as Hamburger } from "hamburger-react";
 
 import NavigationMobile from "./mobile-navigation/NavigationMobile";
@@ -20,6 +22,11 @@ const NavItems = [
 const Navigation = () => {
   const [currNav, setCurrNav] = useState("Home");
   const [isHamActive, setIsHamActive] = useState(false);
+  const cartItems = useSelector((state) => state.cart.items);
+
+  const bagNum = cartItems.reduce((currNum, item) => {
+    return currNum + item.amount;
+  }, 0);
 
   const closeHamHandler = () => {
     setIsHamActive(false);
@@ -56,9 +63,11 @@ const Navigation = () => {
           <Link href="/cart">
             <a>
               <li className="relative mb-2 transition duration">
-                <span className="absolute block -top-3 -right-3 bg-red-600 text-white px-[0.4rem] rounded-full text-sm">
-                  3
-                </span>
+                {bagNum > 0 && (
+                  <span className="absolute block -top-3 -right-3 bg-red-600 text-white px-[0.4rem] rounded-full text-sm">
+                    {bagNum}
+                  </span>
+                )}
                 <BagIcon size="3vh" />
               </li>
             </a>
@@ -82,7 +91,7 @@ const Navigation = () => {
             items={NavItems}
           />
         )}
-        <CartMobileBtn />
+        {bagNum > 0 && <CartMobileBtn bagNum={bagNum} />}
       </div>
     </nav>
   );
