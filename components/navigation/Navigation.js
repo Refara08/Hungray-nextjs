@@ -8,7 +8,6 @@ import { Squash as Hamburger } from "hamburger-react";
 import NavigationMobile from "./mobile-navigation/NavigationMobile";
 import UtensilsIcon from "../icons/Utensils";
 import BagIcon from "../icons/BagIcon";
-import CartMobileBtn from "./cart/CartMobileBtn";
 
 const NavItems = [
   { tag: "Home", link: "/" },
@@ -91,7 +90,6 @@ const Navigation = () => {
             items={NavItems}
           />
         )}
-        {bagNum > 0 && <CartMobileBtn bagNum={bagNum} />}
       </div>
     </nav>
   );

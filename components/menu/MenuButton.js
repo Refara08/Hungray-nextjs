@@ -1,14 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { addItem, removeItem } from "../../store/app-state-data/cartSlice";
 
 const MenuButton = (props) => {
-  const { mealName, price, id } = props;
+  const { mealName, price, id, isExist } = props;
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.items);
-
-  const existingItemIndex = cartItems.findIndex((meals) => meals.id === id);
-  const isExist = cartItems[existingItemIndex];
 
   const addItemHandler = () => {
     dispatch(
@@ -43,7 +39,7 @@ const MenuButton = (props) => {
           >
             -
           </button>
-          <h6>{isExist.amount}</h6>
+          {isExist.amount && <h6>{isExist.amount}</h6>}
           <button
             className="font-bold border-2 border-yellow hover:border-transparent hover:bg-yellow hover:shadow-xl rounded-full h-full aspect-square px-2"
             onClick={addItemHandler}

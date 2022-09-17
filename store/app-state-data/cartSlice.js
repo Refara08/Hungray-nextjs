@@ -10,6 +10,7 @@ const cartSlice = createSlice({
   initialState: initialCartState,
   reducers: {
     addItem(state, action) {
+      //action.payload = {id, name, price, amount}
       //update total harga
       state.totalAmount += action.payload.price;
 
@@ -34,6 +35,7 @@ const cartSlice = createSlice({
       }
     },
     removeItem(state, action) {
+      //action.payload = id
       //define existing item
       const existingCartItemIndex = state.items.findIndex(
         (item) => item.id === action.payload
@@ -60,9 +62,27 @@ const cartSlice = createSlice({
         state.items.splice(existingCartItemIndex, 1);
       }
     },
+    updateItemNote(state, action) {
+      //action.payload = {id, note}
+      const existingCartItemIndex = state.items.findIndex(
+        (item) => item.id === action.payload.id
+      );
+
+      const existingCartItem = state.items[existingCartItemIndex];
+
+      const updatedItem = {
+        ...existingCartItem,
+        note: action.payload.note,
+      };
+
+      let updatedItems = [...state.items];
+      updatedItems[existingCartItemIndex] = updatedItem;
+
+      state.items = updatedItems;
+    },
   },
 });
 
-export const { addItem, removeItem } = cartSlice.actions;
+export const { addItem, removeItem, updateItemNote } = cartSlice.actions;
 
 export default cartSlice.reducer;

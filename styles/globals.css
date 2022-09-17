@@ -49,6 +49,14 @@ a {
 }
 
 .control-group input,
-.control-group textarea {
+.control-group textarea,
+.control-group select {
   @apply border-2 border-stone-200 rounded-lg py-1 px-3;
+}
+
+/* Cart */
+.meals-item-cart input,
+.meals-item-cart textarea,
+.meals-item-cart select {
+  @apply border-b-2 border-stone-400 py-1 px-3;
 }

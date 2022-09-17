@@ -2,9 +2,18 @@ import Image from "next/image";
 
 import MenuButton from "../MenuButton";
 
+import { useSelector } from "react-redux";
+
 const BestSellingItemCard = (props) => {
   const { item } = props;
   const formatedPrice = `Rp.${item.price.toLocaleString("id-ID")}`;
+
+  const cartItems = useSelector((state) => state.cart.items);
+  const existingItemIndex = cartItems.findIndex(
+    (meals) => meals.id === item.id
+  );
+  const isExist = cartItems[existingItemIndex];
+
   return (
     <div className="w-[250px] rounded-xl overflow-hidden border-2 border-stone-200 shadow-xl">
       <Image
@@ -19,7 +28,12 @@ const BestSellingItemCard = (props) => {
         <p>{item.desc}</p>
         <div className="mt-4 flex justify-between items-start">
           <p className="font-semibold">{formatedPrice}</p>
-          <MenuButton mealName={item.name} price={item.price} id={item.id} />
+          <MenuButton
+            mealName={item.name}
+            price={item.price}
+            id={item.id}
+            isExist={isExist}
+          />
         </div>
       </div>
     </div>

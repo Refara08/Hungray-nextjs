@@ -5,8 +5,17 @@ import Home from "../components/home/Home";
 import SignatureMenu from "../components/menu/signature-menu/SignatureMenu";
 import Testimonial from "../components/testimonial/Testimonial";
 import Reservation from "../components/reservation/Reservation";
+import CartMobileBtn from "../components/navigation/cart/CartMobileBtn";
+
+import { useSelector } from "react-redux";
 
 export default function HomePage() {
+  const cartItems = useSelector((state) => state.cart.items);
+
+  const bagNum = cartItems.reduce((currNum, item) => {
+    return currNum + item.amount;
+  }, 0);
+
   return (
     <div>
       <Head>
@@ -21,7 +30,7 @@ export default function HomePage() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      {bagNum > 0 && <CartMobileBtn bagNum={bagNum} />}
       <Home />
       <About />
       <BestSellingItems />
