@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import Image from "next/image";
 import WavesDown from "./waves-down";
 
@@ -27,10 +29,16 @@ const Home = () => {
               ipsum dolor sit, amet consectetur adipisicing elit. Sequi, facere.
             </p>
             <div className="flex flex-wrap justify-start items-center gap-x-4 gap-y-2 mt-4 -ml-1">
-              <button className="button bg-yellow ">Book a reservation</button>
-              <button className="button bg-black  text-white">
-                Order online
-              </button>
+              <Link href="/#reservation">
+                <button className="button bg-yellow ">
+                  Book a reservation
+                </button>
+              </Link>
+              <Link href="/#menu">
+                <button className="button bg-black  text-white">
+                  Order online
+                </button>
+              </Link>
             </div>
           </div>
         </div>

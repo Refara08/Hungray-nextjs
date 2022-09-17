@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useSelector } from "react-redux";
 import BagIcon from "../icons/BagIcon";
@@ -34,6 +34,31 @@ const Cart = () => {
   const changePaymentHandler = (str) => {
     setPayment(str);
   };
+
+  //source: https://github.com/vercel/next.js/issues/2694#issuecomment-732990201
+  useEffect(() => {
+    const warningText =
+      "Your data will be lost if you leave the site, are you sure?";
+
+    const handleWindowClose = (e) => {
+      // if (!unsavedChanges) return;
+      // e.preventDefault();
+      return (e.returnValue = warningText);
+    };
+
+    const handleBrowseAway = () => {
+      // if (!unsavedChanges) return;
+      if (window.confirm(warningText)) return;
+      router.events.emit("routeChangeError");
+      throw "routeChange aborted.";
+    };
+    window.addEventListener("beforeunload", handleWindowClose);
+    router.events.on("routeChangeStart", handleBrowseAway);
+    return () => {
+      window.removeEventListener("beforeunload", handleWindowClose);
+      router.events.off("routeChangeStart", handleBrowseAway);
+    };
+  }, []);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -77,7 +102,7 @@ const Cart = () => {
   }
 
   return (
-    <section id="cart" className="py-12">
+    <section onBe id="cart" className="py-12">
       <div className="custom-container">
         <form
           onSubmit={submitHandler}
