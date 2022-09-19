@@ -5,9 +5,6 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 import BestSellingItemCard from "./BestSellingItemCard";
-import LIST_MENU from "../../../store/menu";
-
-const bestMeals = LIST_MENU.filter((item) => item.bestSeller === true);
 
 const responsive = {
   superLargeDesktop: {
@@ -52,8 +49,9 @@ const responsive = {
   },
 };
 
-const BestSellingItems = () => {
+const BestSellingItems = ({ menuList }) => {
   const [isGrabbing, setIsGrabbing] = useState(false);
+  const bestMeals = menuList.filter((item) => item.bestSeller === true);
 
   return (
     <section id="menu" className="bg-white py-12 lg:py-40">
@@ -87,7 +85,7 @@ const BestSellingItems = () => {
             ssr={true}
             infinite={true}
             autoPlay={true}
-            autoPlaySpeed={3000}
+            autoPlaySpeed={5000}
             keyBoardControl={true}
             customTransition="all 0.3s"
             transitionDuration={500}

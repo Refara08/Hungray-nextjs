@@ -44,7 +44,7 @@ const CartForm = (props) => {
           <div className="control-group">
             <label htmlFor="phone">Phone Number</label>
             <input
-              type="number"
+              type="text"
               name="phone"
               id="phone"
               required

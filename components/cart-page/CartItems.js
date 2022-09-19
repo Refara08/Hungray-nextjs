@@ -6,7 +6,7 @@ const CartItems = ({ cartItems, totalAmount }) => {
   const dispatch = useDispatch();
 
   const updateOrderedMeals = (arr) => {
-    dispatch(updateItemNote({ id: arr.id, note: arr.note }));
+    dispatch(updateItemNote({ _id: arr._id, note: arr.note }));
   };
 
   return (
@@ -15,7 +15,7 @@ const CartItems = ({ cartItems, totalAmount }) => {
         <div>
           {cartItems.map((item) => (
             <CartItem
-              key={item.id}
+              key={item._id}
               item={item}
               onUpdateOrderedMeals={updateOrderedMeals}
             />

@@ -1,23 +1,40 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
-import { useSelector } from "react-redux";
-import BagIcon from "../icons/BagIcon";
+import axios from "axios";
+
+import { useSelector, useDispatch } from "react-redux";
+import { clearItems } from "../../store/app-state-data/cartSlice";
+
 import CartForm from "./CartForm";
 import CartItems from "./CartItems";
 
+import BagIcon from "../icons/BagIcon";
+
 const Cart = () => {
   const router = useRouter();
+
   const cartItems = useSelector((state) => state.cart.items);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
-
+  const dispatch = useDispatch();
   const formatedTotalAmount = `Rp.${totalAmount.toLocaleString("en-US")}`;
 
+  const [unsavedChanges, setUnsavedChanges] = useState(true);
   const [customerName, setCustomerName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState(0);
+  const [phone, setPhone] = useState("");
   const [table, setTable] = useState("");
   const [payment, setPayment] = useState("OVO");
+
+  const formFilled =
+    !!customerName ||
+    customerName.trim().length !== 0 ||
+    !!email ||
+    email.trim().length !== 0 ||
+    !!phone ||
+    phone.trim().length !== 0 ||
+    !!table ||
+    table.trim().length !== 0;
 
   const changeCustomerNameHandler = (str) => {
     setCustomerName(str);
@@ -35,38 +52,13 @@ const Cart = () => {
     setPayment(str);
   };
 
-  //source: https://github.com/vercel/next.js/issues/2694#issuecomment-732990201
-  useEffect(() => {
-    const warningText =
-      "Your data will be lost if you leave the site, are you sure?";
-
-    const handleWindowClose = (e) => {
-      // if (!unsavedChanges) return;
-      // e.preventDefault();
-      return (e.returnValue = warningText);
-    };
-
-    const handleBrowseAway = () => {
-      // if (!unsavedChanges) return;
-      if (window.confirm(warningText)) return;
-      router.events.emit("routeChangeError");
-      throw "routeChange aborted.";
-    };
-    window.addEventListener("beforeunload", handleWindowClose);
-    router.events.on("routeChangeStart", handleBrowseAway);
-    return () => {
-      window.removeEventListener("beforeunload", handleWindowClose);
-      router.events.off("routeChangeStart", handleBrowseAway);
-    };
-  }, []);
-
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
 
     if (
       !customerName ||
       customerName.trim().length === 0 ||
-      !email.includes("@") ||
+      (email && !email.includes("@")) ||
       !phone ||
       phone.trim().length === 0 ||
       !table ||
@@ -76,6 +68,8 @@ const Cart = () => {
       return;
     }
 
+    setUnsavedChanges(false);
+
     const cart = {
       name: customerName,
       email,
@@ -83,11 +77,48 @@ const Cart = () => {
       table,
       payment,
       orderedMeals: cartItems,
+      orderStatus: "UNPAID",
     };
 
-    console.log(cart);
+    // console.log(cart);
+    // console.log(cartItems);
+
     router.replace("/proceed");
+    const res = await axios.post("http://localhost:3000/api/orders", cart);
+    console.log(res);
+    dispatch(clearItems());
   };
+
+  //if no items on cart, or there's item but the form hasn't been filled it wont be warned before leaving the page
+  //else if there's something on cart, AND the form has been filled then it will be warned before leaving
+  //source: https://github.com/vercel/next.js/issues/2694#issuecomment-732990201
+  useEffect(() => {
+    const warningText =
+      "Your data will be lost if you leave the site, are you sure?";
+
+    const handleWindowClose = (e) => {
+      if (!unsavedChanges) return;
+      e.preventDefault();
+      return (e.returnValue = warningText);
+    };
+
+    const handleBrowseAway = () => {
+      if (!unsavedChanges) return;
+      if (window.confirm(warningText)) return;
+      router.events.emit("routeChangeError");
+      throw "routeChange aborted.";
+    };
+
+    if (cartItems.length !== 0 && formFilled) {
+      window.addEventListener("beforeunload", handleWindowClose);
+      router.events.on("routeChangeStart", handleBrowseAway);
+    }
+
+    return () => {
+      window.removeEventListener("beforeunload", handleWindowClose);
+      router.events.off("routeChangeStart", handleBrowseAway);
+    };
+  }, [unsavedChanges, formFilled, cartItems]);
 
   if (cartItems.length === 0) {
     return (
@@ -102,7 +133,7 @@ const Cart = () => {
   }
 
   return (
-    <section onBe id="cart" className="py-12">
+    <section id="cart" className="pt-12">
       <div className="custom-container">
         <form
           onSubmit={submitHandler}

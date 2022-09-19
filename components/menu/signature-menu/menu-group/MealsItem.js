@@ -12,7 +12,7 @@ const MealsItem = ({ item }) => {
 
   const cartItems = useSelector((state) => state.cart.items);
   const existingItemIndex = cartItems.findIndex(
-    (meals) => meals.id === item.id
+    (meals) => meals._id === item._id
   );
   const isExist = cartItems[existingItemIndex];
 
@@ -31,7 +31,7 @@ const MealsItem = ({ item }) => {
             <MenuButton
               mealName={item.name}
               price={item.price}
-              id={item.id}
+              _id={item._id}
               isExist={isExist}
             />
           </div>
@@ -50,7 +50,7 @@ const MealsItem = ({ item }) => {
         <MenuButton
           mealName={item.name}
           price={item.price}
-          id={item.id}
+          _id={item._id}
           isExist={isExist}
         />
       </div>

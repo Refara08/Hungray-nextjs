@@ -13,13 +13,13 @@ const CartItem = ({ item, onUpdateOrderedMeals }) => {
 
   const pushMealHandler = () => {
     onUpdateOrderedMeals({
-      id: item.id,
+      _id: item._id,
       note: note,
     });
   };
 
   return (
-    <div key={item.id} className="meals-item-cart mb-8">
+    <div key={item._id} className="meals-item-cart mb-8">
       <div className="flex justify-between text-lg font-semibold">
         <h4>{item.name}</h4>
         <div className="flex items-center gap-4">
@@ -44,7 +44,7 @@ const CartItem = ({ item, onUpdateOrderedMeals }) => {
           <MenuButton
             mealName={item.name}
             price={item.price}
-            id={item.id}
+            _id={item._id}
             isExist={isExist}
           />
         </div>

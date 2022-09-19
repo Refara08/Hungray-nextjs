@@ -5,18 +5,16 @@ import CategoryFilter from "./CategoryFilter";
 import WaveWrap from "../../ui/WaveWrap";
 import MenuGroup from "./menu-group/MenuGroup";
 
-import LIST_MENU from "../../../store/menu";
-
-const SignatureMenu = () => {
+const SignatureMenu = ({ menuList }) => {
   const [category, setCategory] = useState("ALL");
-  const [menuItems, setMenuItems] = useState([...LIST_MENU]);
+  const [menuItems, setMenuItems] = useState([...menuList]);
   const router = useRouter();
 
   useEffect(() => {
     if (category === "ALL") {
-      setMenuItems(LIST_MENU);
+      setMenuItems(menuList);
     } else {
-      setMenuItems(LIST_MENU.filter((item) => item.category === `${category}`));
+      setMenuItems(menuList.filter((item) => item.category === `${category}`));
       router.replace("/#signature");
     }
   }, [category]);

@@ -8,6 +8,7 @@ import { Squash as Hamburger } from "hamburger-react";
 import NavigationMobile from "./mobile-navigation/NavigationMobile";
 import UtensilsIcon from "../icons/Utensils";
 import BagIcon from "../icons/BagIcon";
+import { useRouter } from "next/router";
 
 const NavItems = [
   { tag: "Home", link: "/" },
@@ -19,9 +20,12 @@ const NavItems = [
 ];
 
 const Navigation = () => {
+  const router = useRouter();
   const [currNav, setCurrNav] = useState("Home");
   const [isHamActive, setIsHamActive] = useState(false);
   const cartItems = useSelector((state) => state.cart.items);
+
+  const pathName = router.pathname;
 
   const bagNum = cartItems.reduce((currNum, item) => {
     return currNum + item.amount;
@@ -59,18 +63,20 @@ const Navigation = () => {
               </Link>
             </li>
           ))}
-          <Link href="/cart">
-            <a>
-              <li className="relative mb-2 transition duration">
-                {bagNum > 0 && (
-                  <span className="absolute block -top-3 -right-3 bg-red-600 text-white px-[0.4rem] rounded-full text-sm">
-                    {bagNum}
-                  </span>
-                )}
-                <BagIcon size="3vh" />
-              </li>
-            </a>
-          </Link>
+          {pathName === "/" && (
+            <Link href="/cart">
+              <a>
+                <li className="relative mb-2 transition duration">
+                  {bagNum > 0 && (
+                    <span className="absolute block -top-3 -right-3 bg-red-600 text-white px-[0.4rem] rounded-full text-sm">
+                      {bagNum}
+                    </span>
+                  )}
+                  <BagIcon size="3vh" />
+                </li>
+              </a>
+            </Link>
+          )}
         </ul>
         <ul className="block lg:hidden">
           <li>

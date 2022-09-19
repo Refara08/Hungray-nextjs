@@ -16,7 +16,7 @@ const cartSlice = createSlice({
 
       //define existing item
       const existingCartItemIndex = state.items.findIndex(
-        (item) => item.id === action.payload.id
+        (item) => item._id === action.payload._id
       );
       const existingCartItem = state.items[existingCartItemIndex];
 
@@ -38,7 +38,7 @@ const cartSlice = createSlice({
       //action.payload = id
       //define existing item
       const existingCartItemIndex = state.items.findIndex(
-        (item) => item.id === action.payload
+        (item) => item._id === action.payload
       );
 
       const existingCartItem = state.items[existingCartItemIndex];
@@ -65,7 +65,7 @@ const cartSlice = createSlice({
     updateItemNote(state, action) {
       //action.payload = {id, note}
       const existingCartItemIndex = state.items.findIndex(
-        (item) => item.id === action.payload.id
+        (item) => item._id === action.payload._id
       );
 
       const existingCartItem = state.items[existingCartItemIndex];
@@ -80,9 +80,13 @@ const cartSlice = createSlice({
 
       state.items = updatedItems;
     },
+    clearItems(state) {
+      state.items = [];
+    },
   },
 });
 
-export const { addItem, removeItem, updateItemNote } = cartSlice.actions;
+export const { addItem, removeItem, updateItemNote, clearItems } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

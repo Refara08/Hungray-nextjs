@@ -10,7 +10,7 @@ const ProceedPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div>Proceeding your order</div>
+      <div>proceed</div>
     </>
   );
 };

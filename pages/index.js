@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import Head from "next/head";
 import About from "../components/about/About";
 import BestSellingItems from "../components/menu/best-selling-section/BestSellingItems";
@@ -9,7 +11,7 @@ import CartMobileBtn from "../components/navigation/cart/CartMobileBtn";
 
 import { useSelector } from "react-redux";
 
-export default function HomePage() {
+export default function HomePage({ menuList }) {
   const cartItems = useSelector((state) => state.cart.items);
 
   const bagNum = cartItems.reduce((currNum, item) => {
@@ -33,10 +35,20 @@ export default function HomePage() {
       {bagNum > 0 && <CartMobileBtn bagNum={bagNum} />}
       <Home />
       <About />
-      <BestSellingItems />
-      <SignatureMenu />
+      <BestSellingItems menuList={menuList} />
+      <SignatureMenu menuList={menuList} />
       <Testimonial />
       <Reservation />
     </div>
   );
 }
+
+export const getServerSideProps = async (ctx) => {
+  const res = await axios.get("http://localhost:3000/api/products");
+
+  return {
+    props: {
+      menuList: res.data,
+    },
+  };
+};
