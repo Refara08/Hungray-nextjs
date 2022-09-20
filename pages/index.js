@@ -44,7 +44,9 @@ export default function HomePage({ menuList }) {
 }
 
 export const getServerSideProps = async (ctx) => {
-  const res = await axios.get("http://localhost:3000/api/products");
+  const res = await axios.get(
+    "https://refara08-hungray-nextjs.vercel.app/api/products"
+  );
 
   return {
     props: {
