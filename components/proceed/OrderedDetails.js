@@ -71,6 +71,7 @@ const OrderedDetails = ({ order }) => {
           <a
             href="https://wa.me/6287825979595"
             target="_blank"
+            rel="noreferrer"
             className="button flex justify-center items-center gap-2 w-full bg-green-700 text-white"
           >
             <WhatsappIcon size={"1.2rem"} />
