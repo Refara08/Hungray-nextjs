@@ -17,6 +17,7 @@ const OrderSchema = new Schema(
         },
       ],
     },
+    totalAmount: { type: Number, required: true },
     payment: { type: String, required: true },
     phone: { type: String, required: true },
     table: { type: String, required: true },

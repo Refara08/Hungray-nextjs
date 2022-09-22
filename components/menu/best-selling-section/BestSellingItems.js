@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import Carousel from "react-multi-carousel";
@@ -49,10 +49,7 @@ const responsive = {
   },
 };
 
-const BestSellingItems = ({ menuList }) => {
-  const [isGrabbing, setIsGrabbing] = useState(false);
-  const bestMeals = menuList.filter((item) => item.bestSeller === true);
-
+const BestSellingItems = ({ bestMeals }) => {
   return (
     <section id="menu" className="bg-white py-12 lg:py-40">
       <div className="custom-container flex flex-col lg:grid lg:grid-cols-6 gap-6 items-center">
@@ -69,13 +66,7 @@ const BestSellingItems = ({ menuList }) => {
             </button>
           </Link>
         </div>
-        <div
-          onMouseDown={() => setIsGrabbing(true)}
-          onMouseUp={() => setIsGrabbing(false)}
-          className={`lg:col-span-4 w-full ${
-            isGrabbing ? "cursor-grabbing" : "cursor-grab"
-          }`}
-        >
+        <div className={`lg:col-span-4 w-full cursor-grab`}>
           <Carousel
             partialVisible={true}
             swipeable={true}
@@ -86,15 +77,15 @@ const BestSellingItems = ({ menuList }) => {
             infinite={true}
             autoPlay={true}
             autoPlaySpeed={5000}
-            keyBoardControl={true}
-            customTransition="all 0.3s"
-            transitionDuration={500}
+            customTransition="all 1s"
+            transitionDuration={1000}
             containerClass="pb-12"
-            arrows={false}
+            arrows={true}
+            // keyBoardControl={true}
             // removeArrowOnDeviceType={["tablet", "mobile"]}
             // deviceType={this.props.deviceType}
             // dotListClass="custom-dot-list-style"
-            itemClass="transition-all duration-300"
+            // itemClass="transition-all duration-300"
           >
             {bestMeals.map((item, index) => (
               <BestSellingItemCard key={index} item={item} />

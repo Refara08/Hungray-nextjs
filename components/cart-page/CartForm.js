@@ -76,9 +76,9 @@ const CartForm = (props) => {
             defaultValue={payment}
             onChange={(e) => onChangePayment(e.target.value)}
           >
+            <option value="Cash">Pay Cash</option>
             <option value="BCA">BCA m-banking</option>
             <option value="BNI">BNI m-banking</option>
-            <option value="Mandiri">Mandiri m-banking</option>
             <option value="OVO">OVO payment</option>
             <option value="Gopay">Gopay payment</option>
           </select>

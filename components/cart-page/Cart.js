@@ -10,6 +10,8 @@ import CartForm from "./CartForm";
 import CartItems from "./CartItems";
 
 import BagIcon from "../icons/BagIcon";
+import axiosBase from "../../utils/axios-base";
+import LoadingIcon from "../icons/LoadingIcon";
 
 const Cart = () => {
   const router = useRouter();
@@ -25,6 +27,7 @@ const Cart = () => {
   const [phone, setPhone] = useState("");
   const [table, setTable] = useState("");
   const [payment, setPayment] = useState("OVO");
+  const [proceed, setProceed] = useState(false);
 
   const formFilled =
     !!customerName ||
@@ -77,15 +80,13 @@ const Cart = () => {
       table,
       payment,
       orderedMeals: cartItems,
+      totalAmount,
       orderStatus: "UNPAID",
     };
 
-    // console.log(cart);
-    // console.log(cartItems);
-
-    router.replace("/proceed");
-    const res = await axios.post("http://localhost:3000/api/orders", cart);
-    console.log(res);
+    setProceed(true);
+    const res = await axiosBase.post(`api/orders`, cart);
+    router.replace(`/orders/${res.data._id}`);
     dispatch(clearItems());
   };
 
@@ -120,7 +121,20 @@ const Cart = () => {
     };
   }, [unsavedChanges, formFilled, cartItems]);
 
-  if (cartItems.length === 0) {
+  if (proceed) {
+    return (
+      <section
+        id="cart"
+        className="flex flex-col justify-end items-center gap-4 text-stone-400 h-[30vh]"
+      >
+        <div className="animate-spin">
+          <LoadingIcon size={"3rem"} />
+        </div>
+      </section>
+    );
+  }
+
+  if (!proceed && cartItems.length === 0) {
     return (
       <section
         id="cart"

@@ -4,8 +4,7 @@ import MenuButton from "../MenuButton";
 
 import { useSelector } from "react-redux";
 
-const BestSellingItemCard = (props) => {
-  const { item } = props;
+const BestSellingItemCard = ({ item }) => {
   const formatedPrice = `Rp.${item.price.toLocaleString("id-ID")}`;
 
   const cartItems = useSelector((state) => state.cart.items);
@@ -15,7 +14,9 @@ const BestSellingItemCard = (props) => {
   const isExist = cartItems[existingItemIndex];
 
   return (
-    <div className="w-[250px] rounded-xl overflow-hidden border-2 border-stone-200 shadow-xl">
+    <div
+      className={`w-[250px] rounded-xl overflow-hidden border-2 border-stone-200 shadow-xl cursor-grab`}
+    >
       <Image
         draggable={false}
         src={item.url}

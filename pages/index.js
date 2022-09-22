@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import axiosBase from "../utils/axios-base";
+
 import Head from "next/head";
 import About from "../components/about/About";
 import BestSellingItems from "../components/menu/best-selling-section/BestSellingItems";
@@ -18,6 +20,19 @@ export default function HomePage({ menuList }) {
     return currNum + item.amount;
   }, 0);
 
+  const compare = (a, b) => {
+    if (a.category < b.category) {
+      return 1;
+    }
+    if (a.category > b.category) {
+      return -1;
+    }
+    return 0;
+  };
+
+  const menuListSorted = menuList.sort(compare);
+  const bestMeals = menuListSorted.filter((item) => item.bestSeller === true);
+
   return (
     <div>
       <Head>
@@ -35,8 +50,8 @@ export default function HomePage({ menuList }) {
       {bagNum > 0 && <CartMobileBtn bagNum={bagNum} />}
       <Home />
       <About />
-      <BestSellingItems menuList={menuList} />
-      <SignatureMenu menuList={menuList} />
+      <BestSellingItems bestMeals={bestMeals} />
+      <SignatureMenu menuList={menuListSorted} />
       <Testimonial />
       <Reservation />
     </div>
@@ -44,9 +59,7 @@ export default function HomePage({ menuList }) {
 }
 
 export const getServerSideProps = async (ctx) => {
-  const res = await axios.get(
-    "https://refara08-hungray-nextjs.vercel.app/api/products"
-  );
+  const res = await axiosBase.get(`api/products`);
 
   return {
     props: {
