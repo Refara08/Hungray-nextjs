@@ -60,3 +60,20 @@ a {
 .meals-item-cart select {
   @apply border-b-2 border-stone-400 py-1 px-3;
 }
+
+/* order-activity */
+/* .activity-table tr {
+  @apply grid grid-cols-2 md:grid-cols-5;
+}
+
+.activity-table th {
+  @apply font-semibold px-4;
+}
+
+.activity-table td {
+  @apply px-4;
+} */
+
+.activity-table h5 {
+  @apply font-semibold mt-1;
+}

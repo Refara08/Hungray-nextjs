@@ -1,14 +1,14 @@
 import { useState } from "react";
-import Link from "next/link";
-
+import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+import { signOut } from "next-auth/react";
+import Link from "next/link";
 
 import { Squash as Hamburger } from "hamburger-react";
 
 import NavigationMobile from "./mobile-navigation/NavigationMobile";
 import UtensilsIcon from "../icons/Utensils";
 import BagIcon from "../icons/BagIcon";
-import { useRouter } from "next/router";
 
 const NavItems = [
   { tag: "Home", link: "/" },
@@ -17,6 +17,11 @@ const NavItems = [
   { tag: "Testimonials", link: "/#testimonials" },
   { tag: "Reservation", link: "/#reservation" },
   { tag: "Contact Us", link: "/#contact" },
+];
+
+const adminNavItems = [
+  { tag: "Orders", link: "/admin/orders" },
+  { tag: "Manage Menu", link: "/admin/menu" },
 ];
 
 const Navigation = () => {
@@ -37,8 +42,8 @@ const Navigation = () => {
 
   return (
     <nav className=" bg-light-yellow text-black sticky top-0 z-30">
-      <div className="container mx-auto flex justify-between items-center py-4 px-4 pb-2">
-        <Link href={"/"}>
+      <div className="container mx-auto flex justify-between items-center py-4 px-4">
+        <Link href={pathName.substring(0, 6) !== "/admin" ? "/" : "/admin"}>
           <a
             onClick={() => setCurrNav("Home")}
             className="flex items-center gap-1 pb-2 text-3xl"
@@ -48,21 +53,41 @@ const Navigation = () => {
           </a>
         </Link>
         <ul className="hidden lg:flex justify-end items-center gap-8">
-          {NavItems.map((item, index) => (
-            <li
-              key={index}
-              className={`cursor-pointer mx-2 font-semibold transition duration-300 border-b-2 pb-2 hover:text-black hover:border-yellow ${
-                currNav === item.tag
-                  ? "text-black border-yellow"
-                  : "text-stone-500 border-transparent"
-              }`}
-              onClick={() => setCurrNav(item.tag)}
-            >
-              <Link href={item.link}>
-                <a>{item.tag}</a>
-              </Link>
-            </li>
-          ))}
+          {/* links for admin page */}
+          {pathName.substring(0, 6) === "/admin" &&
+            adminNavItems.map((item, index) => (
+              <li
+                key={index}
+                className={`cursor-pointer mx-2 font-semibold transition duration-300 border-b-2 py-2 hover:text-black hover:border-yellow ${
+                  currNav === item.tag
+                    ? "text-black border-yellow"
+                    : "text-stone-500 border-transparent"
+                }`}
+                onClick={() => setCurrNav(item.tag)}
+              >
+                <Link href={item.link}>
+                  <a>{item.tag}</a>
+                </Link>
+              </li>
+            ))}
+          {/* default link navigation */}
+          {pathName.substring(0, 6) !== "/admin" &&
+            NavItems.map((item, index) => (
+              <li
+                key={index}
+                className={`cursor-pointer mx-2 font-semibold transition duration-300 border-b-2 py-2 hover:text-black hover:border-yellow ${
+                  currNav === item.tag
+                    ? "text-black border-yellow"
+                    : "text-stone-500 border-transparent"
+                }`}
+                onClick={() => setCurrNav(item.tag)}
+              >
+                <Link href={item.link}>
+                  <a>{item.tag}</a>
+                </Link>
+              </li>
+            ))}
+          {/* cart */}
           {pathName === "/" && (
             <Link href="/cart">
               <a>
@@ -76,6 +101,15 @@ const Navigation = () => {
                 </li>
               </a>
             </Link>
+          )}
+          {/* logout admin mode */}
+          {pathName.substring(0, 6) === "/admin" && (
+            <button
+              onClick={() => signOut()}
+              className="button bg-red-600 text-white"
+            >
+              Logout
+            </button>
           )}
         </ul>
         <ul className="block lg:hidden">
@@ -94,6 +128,7 @@ const Navigation = () => {
             currNav={currNav}
             setCurrNav={setCurrNav}
             items={NavItems}
+            adminItems={adminNavItems}
           />
         )}
       </div>
