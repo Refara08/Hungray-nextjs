@@ -44,8 +44,8 @@ const Auth = () => {
   };
 
   return (
-    <div className="h-[50vh] w-full grid place-items-center">
-      <div className="w-[450px] shadow-xl px-6 pb-4 rounded-xl border-2 border-stone-100">
+    <div className="h-[50vh] custom-container w-full grid place-items-center">
+      <div className="w-full md:w-[450px] shadow-xl px-6 pb-4 rounded-xl border-2 border-stone-100">
         <h2 className="text-center text-2xl font-bold py-4">Login</h2>
         <form onSubmit={submitHandler}>
           <div className="control-group">

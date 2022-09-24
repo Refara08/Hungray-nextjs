@@ -12,8 +12,9 @@ import CartItems from "./CartItems";
 import BagIcon from "../icons/BagIcon";
 import axiosBase from "../../utils/axios-base";
 import LoadingIcon from "../icons/LoadingIcon";
+import RestaurantCrossIcon from "../icons/RestaurantCrossIcon";
 
-const Cart = () => {
+const Cart = ({ restoStatus }) => {
   const router = useRouter();
 
   const cartItems = useSelector((state) => state.cart.items);
@@ -120,6 +121,18 @@ const Cart = () => {
       router.events.off("routeChangeStart", handleBrowseAway);
     };
   }, [unsavedChanges, formFilled, cartItems]);
+
+  if (!restoStatus.isReceivingOrder) {
+    return (
+      <section
+        id="cart"
+        className="flex flex-col justify-end items-center gap-4 text-stone-400 h-[30vh]"
+      >
+        <RestaurantCrossIcon size="4rem" />
+        <span className="text-3xl font-bold">Sorry, Hungray is closed :(</span>
+      </section>
+    );
+  }
 
   if (proceed) {
     return (
