@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://refara08-hungray-nextjs.vercel.app/",
+  baseURL: process.env.API_URL,
 });
 //http://localhost:3000
-//https://refara08-hungray-nextjs.vercel.app/
+//https://refara08-hungray-nextjs.vercel.app
