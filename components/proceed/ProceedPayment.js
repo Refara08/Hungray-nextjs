@@ -16,7 +16,7 @@ const ProceedPayment = ({
   ).slice(-2)}`;
 
   const cancelOrderHandler = async () => {
-    const res = await axiosBase.put(`api/orders/${route.query.id}`, {
+    const res = await axiosBase.put(`/api/orders/${route.query.id}`, {
       orderStatus: "CANCELED",
     });
 

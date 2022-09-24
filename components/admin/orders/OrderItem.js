@@ -1,30 +1,51 @@
 import { useState } from "react";
+import axiosBase from "../../../utils/axios-base";
 
-const OrderItem = ({ item }) => {
+const OrderItem = ({ item, updateList }) => {
   const [seeDetails, setSeeDetails] = useState(false);
+
+  const goToNextStageHandler = async () => {
+    let action;
+
+    if (item.orderStatus === "UNPAID") {
+      action = "PAID";
+    } else if (item.orderStatus === "PAID") {
+      action = "COOKED";
+    } else if (item.orderStatus === "COOKED") {
+      action = "SERVED";
+    }
+
+    // console.log(action);
+
+    await axiosBase.put(`/api/orders/${item._id}`, {
+      orderStatus: action,
+    });
+    // console.log(res.data);
+    updateList();
+  };
 
   return (
     <div className="mb-6 border-b-2 border-stone-100 pb-2">
-      <div className="w-full activity-table grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-start justify-items-start items-start gap-1 lg:gap-x-6">
-        <div className="flex flex-col xl:flex-row xl:items-center xl:gap-4 justify-start col-span-2 xl:col-span-4">
+      <div className="w-full activity-table grid grid-cols-2 lg:grid-cols-3 justify-start justify-items-start items-start gap-1 lg:gap-x-6">
+        <div className="flex flex-col justify-start col-span-2">
           <h5>orderID</h5>
-          <h6 className="xl:mt-1">{item._id}</h6>
+          <h6 className="">{item._id}</h6>
         </div>
-        <div className="flex flex-col xl:flex-row justify-start xl:items-center xl:gap-4">
+        <div className="flex flex-col justify-start">
           <h5>name</h5>
-          <h6 className="xl:mt-1">{item.name}</h6>
+          <h6 className="">{item.name}</h6>
         </div>
-        <div className="flex flex-col xl:flex-row justify-start xl:items-center xl:gap-4">
+        <div className="flex flex-col justify-start">
           <h5>phone</h5>
-          <h6 className="xl:mt-1">{item.phone}</h6>
+          <h6 className="">{item.phone}</h6>
         </div>
-        <div className="flex flex-col xl:flex-row justify-start xl:items-center xl:gap-4">
+        <div className="flex flex-col justify-start">
           <h5>Table Num</h5>
-          <h6 className="xl:mt-1">{item.table}</h6>
+          <h6 className="">{item.table}</h6>
         </div>
-        <div className="flex flex-col xl:flex-row justify-start xl:items-center xl:gap-4">
+        <div className="flex flex-col justify-start">
           <h5>Payment method</h5>
-          <h6 className="xl:mt-1">{item.payment}</h6>
+          <h6 className="">{item.payment}</h6>
         </div>
       </div>
       {!seeDetails && (
@@ -63,6 +84,18 @@ const OrderItem = ({ item }) => {
           </button>
         </div>
       )}
+      <div className="w-full flex justify-end mt-2">
+        <button
+          onClick={goToNextStageHandler}
+          className="button-sm bg-blue-600 text-white"
+        >
+          {item.orderStatus === "UNPAID"
+            ? "confirm payment"
+            : item.orderStatus === "PAID"
+            ? "meals ready"
+            : item.orderStatus === "COOKED" && "complete order"}
+        </button>
+      </div>
     </div>
   );
 };

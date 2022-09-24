@@ -1,6 +1,8 @@
 import OrderedDetails from "./OrderedDetails";
 import ProceedPayment from "./ProceedPayment";
 import ProceedExpired from "./ProceedExpired";
+import ProceedInKitchen from "./ProceedInKitchen";
+import ProceedMealsComing from "./ProceedMealsComing";
 
 const ProceedActions = ({ order, expiredDate, onUpdateLoadedOrder }) => {
   return (
@@ -14,6 +16,10 @@ const ProceedActions = ({ order, expiredDate, onUpdateLoadedOrder }) => {
           onUpdateLoadedOrder={onUpdateLoadedOrder}
         />
       )}
+      {order.orderStatus === "PAID" && (
+        <ProceedInKitchen updatedAt={order.updatedAt} />
+      )}
+      {order.orderStatus === "COOKED" && <ProceedMealsComing />}
       {(order.orderStatus === "EXPIRED" ||
         order.orderStatus === "CANCELED") && <ProceedExpired />}
     </div>

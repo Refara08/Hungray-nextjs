@@ -19,23 +19,40 @@ const OrderPage = ({ order }) => {
     setLoadedOrder(data);
   };
 
+  //update order every 1 minutes
+  useEffect(() => {
+    const updateOrder = setInterval(() => {
+      if (loadedOrder.orderStatus === "SERVED") {
+        return;
+      }
+
+      axiosBase.get(`/api/orders/${route.query.id}`).then(function (response) {
+        setLoadedOrder(response.data);
+        // console.log(response);
+      });
+    }, 60000);
+
+    return () => clearInterval(updateOrder);
+  }, [loadedOrder.orderStatus]);
+
+  //update order status to Expired if the payment not proceed until due time
   useEffect(() => {
     const expiringTimer = setInterval(() => {
       setIsExpired(new Date() >= new Date(expiredDate));
     }, 5000);
 
-    if (isExpired && !expiredUpdated) {
+    if (isExpired && !expiredUpdated && loadedOrder.orderStatus === "UNPAID") {
       setExpiredUpdated(true);
       axiosBase
-        .put(`api/orders/${route.query.id}`, { orderStatus: "EXPIRED" })
+        .put(`/api/orders/${route.query.id}`, { orderStatus: "EXPIRED" })
         .then(function (response) {
           setLoadedOrder(response.data);
-          console.log(response);
+          // console.log(response);
         });
     }
 
     return () => clearInterval(expiringTimer);
-  }, [isExpired, expiredUpdated]);
+  }, [isExpired, expiredUpdated, loadedOrder.orderStatus]);
 
   //warning pop-up when leaving the page
   useEffect(() => {
@@ -45,7 +62,8 @@ const OrderPage = ({ order }) => {
     const handleWindowClose = (e) => {
       if (
         loadedOrder.orderStatus === "EXPIRED" ||
-        loadedOrder.orderStatus === "CANCELED"
+        loadedOrder.orderStatus === "CANCELED" ||
+        loadedOrder.orderStatus === "SERVED"
       )
         return;
       e.preventDefault();
@@ -55,7 +73,8 @@ const OrderPage = ({ order }) => {
     const handleBrowseAway = () => {
       if (
         loadedOrder.orderStatus === "EXPIRED" ||
-        loadedOrder.orderStatus === "CANCELED"
+        loadedOrder.orderStatus === "CANCELED" ||
+        loadedOrder.orderStatus === "SERVED"
       )
         return;
       if (window.confirm(warningText)) return;
